@@ -27,6 +27,7 @@ public class Person implements Identifiable {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Remark remark;
 
     /**
      * Creates a Person with the given id, name, phone, email and address.
@@ -37,9 +38,10 @@ public class Person implements Identifiable {
      * @param email   the email of the person.
      * @param address the address of the person.
      * @param tags    the tags of the person.
+     * @param remark the remark of the person.
      */
     public Person(String id, Name name, Phone phone, Email email,
-                  Address address, Set<Tag> tags) {
+                  Address address, Remark remark, Set<Tag> tags) {
         requireAllNonNull(id, name, phone, email, address, tags);
         this.id = id;
         this.name = name;
@@ -47,6 +49,7 @@ public class Person implements Identifiable {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.remark = remark;
     }
 
     /**
@@ -58,10 +61,10 @@ public class Person implements Identifiable {
      * @param email   the email of the person.
      * @param address the address of the person.
      * @param tags    the tags of the person.
-     * @see Person#Person(String, Name, Phone, Email, Address, Set)
+     * @param remark the remark of the person.
      */
     public Person(Name name, Phone phone, Email email,
-                  Address address, Set<Tag> tags) {
+                  Address address, Remark remark, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.id = UUID.randomUUID().toString();
         this.name = name;
@@ -69,6 +72,7 @@ public class Person implements Identifiable {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.remark = remark;
     }
 
     public Name getName() {
@@ -85,6 +89,10 @@ public class Person implements Identifiable {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Remark getRemark() {
+        return remark;
     }
 
     /**
@@ -144,7 +152,9 @@ public class Person implements Identifiable {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append(" Remark: ")
+                .append(getRemark());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
