@@ -26,7 +26,31 @@ public class Person implements Identifiable {
 
     // Data fields
     private final Address address;
+    private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
+
+    /**
+     * Creates a Person with the given id, name, phone, email and address.
+     *
+     * @param id      the id of the person.
+     * @param name    the name of the person.
+     * @param phone   the phone number of the person.
+     * @param email   the email of the person.
+     * @param address the address of the person.
+     * @param tags    the tags of the person.
+     * @param remark  the remarks of the person
+     */
+    public Person(String id, Name name, Phone phone, Email email,
+                  Address address, Set<Tag> tags, Remark remark) {
+        requireAllNonNull(id, name, phone, email, address, tags, remark);
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.remark = remark;
+    }
 
     /**
      * Creates a Person with the given id, name, phone, email and address.
@@ -47,6 +71,7 @@ public class Person implements Identifiable {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.remark = null;
     }
 
     /**
@@ -69,6 +94,7 @@ public class Person implements Identifiable {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.remark = null;
     }
 
     public Name getName() {
