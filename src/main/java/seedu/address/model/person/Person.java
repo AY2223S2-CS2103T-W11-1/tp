@@ -30,7 +30,7 @@ public class Person implements Identifiable {
     private final Set<Tag> tags = new HashSet<>();
 
     /**
-     * Creates a Person with the given id, name, phone, email and address.
+     * Creates a Person with the given id, name, phone, email, address, and remark.
      *
      * @param id      the id of the person.
      * @param name    the name of the person.
@@ -72,6 +72,30 @@ public class Person implements Identifiable {
         this.address = address;
         this.tags.addAll(tags);
         this.remark = null;
+    }
+
+    /**
+     * Creates a Person with the given name, phone, email, address, and remark and a
+     * random {@code UUID} as the id.
+     *
+     * @param name    the name of the person.
+     * @param phone   the phone number of the person.
+     * @param email   the email of the person.
+     * @param address the address of the person.
+     * @param tags    the tags of the person.
+     * @param remark  the remark of the person
+     * @see Person#Person(String, Name, Phone, Email, Address, Set)
+     */
+    public Person(Name name, Phone phone, Email email,
+                  Address address, Set<Tag> tags, Remark remark) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.id = UUID.randomUUID().toString();
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.remark = remark;
     }
 
     /**
@@ -135,6 +159,14 @@ public class Person implements Identifiable {
     }
 
     /**
+     * Returns the remark.
+     * @return the remark of the person.
+     */
+    public Remark getRemark() {
+        return remark;
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
@@ -170,7 +202,9 @@ public class Person implements Identifiable {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append(" Remark: ")
+                .append(getRemark());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
