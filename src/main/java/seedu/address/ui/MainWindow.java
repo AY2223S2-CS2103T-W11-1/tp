@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
@@ -19,6 +20,8 @@ import seedu.address.logic.core.exceptions.CommandException;
 import seedu.address.logic.core.exceptions.ParseException;
 import seedu.address.ui.core.ItemListPanel;
 
+import static seedu.address.commons.util.AppUtil.getImage;
+
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
@@ -26,6 +29,7 @@ import seedu.address.ui.core.ItemListPanel;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String WINGMAN_LOGO = "/images/wingman.png";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -43,6 +47,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private ImageView wingmanLogo;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -114,6 +121,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        wingmanLogo.setImage(getImage(WINGMAN_LOGO));
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         itemListPanel = new ItemListPanel(logic.getFilteredItemList());
         Region item = itemListPanel.getRoot();

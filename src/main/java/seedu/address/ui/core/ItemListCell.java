@@ -9,6 +9,9 @@ import seedu.address.model.item.Item;
  * @param <T> The type of item to display.
  */
 public class ItemListCell<T extends Item> extends ListCell<T> {
+
+    private static final String FXML = "ItemListCard.fxml";
+
     @Override
     protected void updateItem(T item, boolean empty) {
         super.updateItem(item, empty);

@@ -6,13 +6,14 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 
+<?import javafx.scene.image.ImageView?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         title="Wingman App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -22,38 +23,49 @@
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
       </stylesheets>
-
       <VBox>
-        <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-          <Menu mnemonicParsing="false" text="File">
-            <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+        <MenuBar fx:id="menuBar" style="-fx-padding: 10 10 0 10;" VBox.vgrow="NEVER">
+          <Menu mnemonicParsing="false" style="-fx-background-color: #6E6D6E" text="File">
+            <MenuItem mnemonicParsing="false" onAction="#handleExit" styleClass="secondary-button" text="Exit" />
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+          <Menu mnemonicParsing="false" style="-fx-background-color: derive(#6E6D6E, 30%); -fx-background-radius: 0 10 0 0;" text="Help">
+            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" styleClass="secondary-button" text="Help" />
           </Menu>
         </MenuBar>
-
-        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
+        <HBox style="-fx-background-color:#DAE3E6">
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets bottom="10" left="10" right="10"/>
           </padding>
-        </StackPane>
-
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
-          <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
-          </padding>
-        </StackPane>
+          <StackPane HBox.hgrow="ALWAYS">
+          <VBox HBox.hgrow="ALWAYS">
+            <StackPane fx:id="commandBoxPlaceholder"  VBox.vgrow="NEVER"/>
+            <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" VBox.vgrow="NEVER" styleClass="result-bar"/>
+          </VBox>
+          </StackPane>
+          <StackPane alignment="CENTER" styleClass="image-view" VBox.vgrow="NEVER">
+            <children>
+              <ImageView fx:id="wingmanLogo" fitWidth="140" preserveRatio="true" />
+            </children>
+<!--            <padding>-->
+<!--              <Insets bottom="10" left="10" right="10" top="20" />-->
+<!--            </padding>-->
+          </StackPane>
+        </HBox>
+      <HBox spacing="10" style="-fx-background-color:#DAE3E6" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+        <padding>
+          <Insets bottom="10" left="10" right="10" top="10" />
+        </padding>
 
         <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
           <padding>
             <Insets top="10" right="10" bottom="10" left="10" />
           </padding>
           <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
 
+        </VBox>
+      </HBox >
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+
       </VBox>
     </Scene>
   </scene>
