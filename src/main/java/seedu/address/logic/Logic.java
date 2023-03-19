@@ -6,6 +6,7 @@ import seedu.address.logic.core.CommandResult;
 import seedu.address.logic.core.exceptions.CommandException;
 import seedu.address.logic.core.exceptions.ParseException;
 import seedu.address.model.OperationMode;
+import seedu.address.model.flight.Flight;
 import seedu.address.model.item.Item;
 
 /**
@@ -45,4 +46,11 @@ public interface Logic {
      * @return the current operation mode.
      */
     OperationMode getOperationMode();
+
+    /**
+     * Gets the filtered list of flights.
+     *
+     * @return the filtered list of flights.
+     */
+    ObservableList<Flight> getFilteredFlightList();
 }

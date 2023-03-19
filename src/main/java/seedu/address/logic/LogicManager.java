@@ -14,6 +14,7 @@ import seedu.address.logic.core.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.OperationMode;
 import seedu.address.model.item.Item;
+import seedu.address.model.flight.Flight;
 import seedu.address.storage.Storage;
 
 /**
@@ -109,6 +110,14 @@ public class LogicManager implements Logic {
                         + "items");
         return model.getItemsList();
     }
+
+    @Override
+    public ObservableList<Flight> getFilteredFlightList() {
+        logger.info("Getting filtered flight list: " + model.getFlightList().size() + " "
+                + "flights");
+        return model.getFlightList();
+    }
+
 
     @Override
     public OperationMode getOperationMode() {

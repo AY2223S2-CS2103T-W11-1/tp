@@ -56,16 +56,26 @@
           <Insets bottom="10" left="10" right="10" top="10" />
         </padding>
 
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+        <VBox fx:id="personList" styleClass="list-pane" minWidth="340" prefWidth="340"  VBox.vgrow="ALWAYS">
           <padding>
             <Insets top="10" right="10" bottom="10" left="10" />
           </padding>
           <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-
         </VBox>
+
+<!--        <VBox  minWidth="300" prefWidth="300" styleClass="list-pane" HBox.hgrow="ALWAYS">-->
+
+<!--        </VBox>-->
+
+        <VBox fx:id="flightList" styleClass="list-pane" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+          <padding>
+            <Insets top="10" right="10" bottom="10" left="1" />
+          </padding>
+          <StackPane fx:id="flightListPanelPlaceholder" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS"/>
+        </VBox>
+
       </HBox >
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
-
       </VBox>
     </Scene>
   </scene>

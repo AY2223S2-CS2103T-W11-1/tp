@@ -55,6 +55,11 @@ public interface Model {
     ObservableList<Item> getItemsList();
 
     /**
+     * Returns the list of flights.
+     */
+    ObservableList<Flight> getFlightList();
+
+    /**
      * Returns the user prefs' GUI settings.
      */
     GuiSettings getGuiSettings();
