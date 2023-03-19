@@ -11,8 +11,8 @@ import seedu.address.storage.json.serializable.JsonSerializableLocationManager;
 /**
  * Represents a storage for {@link Location}s.
  */
-public class JsonLocationManagerStorage extends JsonItemStorage<Location,
-        JsonAdaptedLocation, JsonSerializableLocationManager> {
+public class JsonLocationManagerStorage
+        extends JsonItemStorage<Location, JsonAdaptedLocation, JsonSerializableLocationManager> {
     /**
      * Creates a new JsonIdentifiableStorage object.
      *
@@ -28,7 +28,9 @@ public class JsonLocationManagerStorage extends JsonItemStorage<Location,
     }
 
     @Override
-    protected JsonSerializableLocationManager createManager(ReadOnlyItemManager<Location> modelManager) {
+    protected JsonSerializableLocationManager createManager(
+            ReadOnlyItemManager<Location> modelManager
+    ) {
         return JsonSerializableLocationManager.from(modelManager);
     }
 }

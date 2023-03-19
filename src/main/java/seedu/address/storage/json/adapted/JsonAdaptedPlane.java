@@ -11,7 +11,8 @@ import seedu.address.storage.json.JsonAdaptedModel;
  * Represents a Jackson-friendly version of a Plane.
  */
 public class JsonAdaptedPlane implements JsonAdaptedModel<Plane> {
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Plane's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT =
+            "Plane's %s field is missing!";
     private final String id;
     private final String planeModel;
     private final int planeAge;
@@ -25,9 +26,11 @@ public class JsonAdaptedPlane implements JsonAdaptedModel<Plane> {
      * @param planeAge   the age of the plane.
      */
     @JsonCreator
-    public JsonAdaptedPlane(@JsonProperty("id") String id,
-                            @JsonProperty("planeModel") String planeModel,
-                            @JsonProperty("planeAge") int planeAge) {
+    public JsonAdaptedPlane(
+            @JsonProperty("id") String id,
+            @JsonProperty("planeModel") String planeModel,
+            @JsonProperty("planeAge") int planeAge
+    ) {
         this.id = id;
         this.planeModel = planeModel;
         this.planeAge = planeAge;
@@ -47,11 +50,15 @@ public class JsonAdaptedPlane implements JsonAdaptedModel<Plane> {
     @Override
     public Plane toModelType() throws IllegalValueException {
         if (id == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "id"));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, "id")
+            );
         }
 
         if (planeModel == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "model"));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, "model")
+            );
         }
 
         return new Plane(id, planeModel, planeAge);

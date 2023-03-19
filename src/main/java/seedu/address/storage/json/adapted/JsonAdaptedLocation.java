@@ -11,7 +11,8 @@ import seedu.address.storage.json.JsonAdaptedModel;
  * Represents a Jackson-friendly version of a Pilot.
  */
 public class JsonAdaptedLocation implements JsonAdaptedModel<Location> {
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Location's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT =
+            "Location's %s field is missing!";
 
     /**
      * The id of the location.
@@ -31,8 +32,10 @@ public class JsonAdaptedLocation implements JsonAdaptedModel<Location> {
      * @param name The name of the location.
      */
     @JsonCreator
-    public JsonAdaptedLocation(@JsonProperty("id") String id,
-                               @JsonProperty("name") String name) {
+    public JsonAdaptedLocation(
+            @JsonProperty("id") String id,
+            @JsonProperty("name") String name
+    ) {
         this.id = id;
         this.name = name;
     }
@@ -50,10 +53,14 @@ public class JsonAdaptedLocation implements JsonAdaptedModel<Location> {
     @Override
     public Location toModelType() throws IllegalValueException {
         if (id == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "id"));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, "id")
+            );
         }
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "name"));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, "name")
+            );
         }
 
         return new Location(id, name);

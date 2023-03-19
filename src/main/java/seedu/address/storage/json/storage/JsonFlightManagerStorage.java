@@ -9,12 +9,11 @@ import seedu.address.storage.json.adapted.JsonAdaptedFlight;
 import seedu.address.storage.json.serializable.JsonSerializableFlightManager;
 
 
-
 /**
  * Represents a storage for {@link Flight}s.
  */
-public class JsonFlightManagerStorage extends JsonItemStorage<Flight,
-        JsonAdaptedFlight, JsonSerializableFlightManager> {
+public class JsonFlightManagerStorage
+        extends JsonItemStorage<Flight, JsonAdaptedFlight, JsonSerializableFlightManager> {
     /**
      * Creates a new JsonIdentifiableStorage object.
      *
@@ -30,7 +29,9 @@ public class JsonFlightManagerStorage extends JsonItemStorage<Flight,
     }
 
     @Override
-    protected JsonSerializableFlightManager createManager(ReadOnlyItemManager<Flight> modelManager) {
+    protected JsonSerializableFlightManager createManager(
+            ReadOnlyItemManager<Flight> modelManager
+    ) {
         return JsonSerializableFlightManager.from(modelManager);
     }
 }

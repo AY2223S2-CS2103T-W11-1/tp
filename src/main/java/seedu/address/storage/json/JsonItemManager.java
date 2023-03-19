@@ -42,8 +42,8 @@ public abstract class JsonItemManager<T extends Item, F extends JsonAdaptedModel
      */
     protected void readFromManager(ReadOnlyItemManager<T> manager) {
         items.addAll(manager.getItemList().stream()
-                .map(this::getJsonAdaptedModel)
-                .collect(Collectors.toList()));
+                            .map(this::getJsonAdaptedModel)
+                            .collect(Collectors.toList()));
     }
 
     @Override
@@ -52,7 +52,9 @@ public abstract class JsonItemManager<T extends Item, F extends JsonAdaptedModel
         for (F item : items) {
             T modelItem = item.toModelType();
             if (manager.hasItem(modelItem)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_ITEMS + ": " + modelItem);
+                throw new IllegalValueException(
+                        MESSAGE_DUPLICATE_ITEMS + ": " + modelItem
+                );
             }
             manager.addItem(modelItem);
         }

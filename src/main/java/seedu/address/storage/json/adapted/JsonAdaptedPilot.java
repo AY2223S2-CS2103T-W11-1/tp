@@ -15,7 +15,8 @@ import seedu.address.storage.json.JsonAdaptedModel;
  * Represents a Jackson-friendly version of a Pilot.
  */
 public class JsonAdaptedPilot implements JsonAdaptedModel<Pilot> {
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Pilot's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT =
+            "Pilot's %s field is missing!";
 
     /**
      * The id of the pilot.
@@ -55,12 +56,14 @@ public class JsonAdaptedPilot implements JsonAdaptedModel<Pilot> {
      * @param rank The rank of the pilot.
      */
     @JsonCreator
-    public JsonAdaptedPilot(@JsonProperty("id") String id,
-        @JsonProperty("name") String name,
-        @JsonProperty("rank") int rank,
-        @JsonProperty("age") int age,
-        @JsonProperty("gender") int gender,
-        @JsonProperty("flightHour") int flightHour) {
+    public JsonAdaptedPilot(
+            @JsonProperty("id") String id,
+            @JsonProperty("name") String name,
+            @JsonProperty("rank") int rank,
+            @JsonProperty("age") int age,
+            @JsonProperty("gender") int gender,
+            @JsonProperty("flightHour") int flightHour
+    ) {
         this.id = id;
         this.name = name;
         this.rank = rank;
@@ -87,10 +90,14 @@ public class JsonAdaptedPilot implements JsonAdaptedModel<Pilot> {
     @Override
     public Pilot toModelType() throws IllegalValueException {
         if (id == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "id"));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, "id")
+            );
         }
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "name"));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, "name")
+            );
         }
 
         final PilotRank rank;
