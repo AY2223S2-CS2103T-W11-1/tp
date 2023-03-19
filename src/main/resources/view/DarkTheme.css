@@ -113,12 +113,20 @@
 }
 
 .list-cell:filled:selected #cardPane {
-    -fx-border-color: #DAE3E6;
-    -fx-border-width: 1;
+    -fx-border-color: white;
+    -fx-border-width: 3;
+    -fx-border-radius: 5;
 }
 
 .list-cell .label {
     -fx-text-fill: #6E6D6E;
+    -fx-font-weight: bold;
+}
+
+.list-pane {
+     -fx-background-color: derive(#DAE3E6, 10%);
+     -fx-background-radius: 8;
+     -fx-border-top-width: 1px;
 }
 
 .cell_big_label {

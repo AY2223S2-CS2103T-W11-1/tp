@@ -8,7 +8,7 @@ import seedu.address.logic.core.CommandResult;
 import seedu.address.logic.core.exceptions.CommandException;
 import seedu.address.logic.core.exceptions.ParseException;
 import seedu.address.model.OperationMode;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.flight.Flight;
 import seedu.address.model.item.Item;
 import seedu.address.model.person.Person;
 
@@ -25,23 +25,6 @@ public interface Logic {
      * @throws ParseException   If an error occurs during parsing.
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
-
-    /**
-     * Returns the AddressBook.
-     *
-     * @see seedu.address.model.Model#getAddressBook()
-     */
-    ReadOnlyAddressBook getAddressBook();
-
-    /**
-     * Returns an unmodifiable view of the filtered list of persons
-     */
-    ObservableList<Person> getFilteredPersonList();
-
-    /**
-     * Returns the user prefs' address book file path.
-     */
-    Path getAddressBookFilePath();
 
     /**
      * Returns the user prefs' GUI settings.
@@ -66,4 +49,11 @@ public interface Logic {
      * @return the current operation mode.
      */
     OperationMode getOperationMode();
+
+    /**
+     * Gets the filtered list of flights.
+     *
+     * @return the filtered list of flights.
+     */
+    ObservableList<Flight> getFilteredFlightList();
 }

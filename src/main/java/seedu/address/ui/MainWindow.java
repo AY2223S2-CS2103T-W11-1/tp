@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.commons.util.AppUtil.getImage;
+
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -20,8 +22,6 @@ import seedu.address.logic.core.exceptions.CommandException;
 import seedu.address.logic.core.exceptions.ParseException;
 import seedu.address.ui.core.ItemListPanel;
 
-import static seedu.address.commons.util.AppUtil.getImage;
-
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
@@ -37,10 +37,10 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
     private ItemListPanel itemListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private FlightListPanel flightListPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -59,6 +59,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane flightListPanelPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -122,7 +125,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         wingmanLogo.setImage(getImage(WINGMAN_LOGO));
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+
         itemListPanel = new ItemListPanel(logic.getFilteredItemList());
         Region item = itemListPanel.getRoot();
         personListPanelPlaceholder.getChildren().add(item);
@@ -136,6 +139,10 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        flightListPanel = new FlightListPanel(logic.getFilteredFlightList());
+        Region flight = flightListPanel.getRoot();
+        flightListPanelPlaceholder.getChildren().add(flight);
     }
 
     /**
@@ -178,10 +185,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
-    }
-
     /**
      * Executes the command and returns the result.
      *
@@ -196,6 +199,10 @@ public class MainWindow extends UiPart<Stage> {
             StatusBarFooter statusBarFooter =
                     new StatusBarFooter(logic.getOperationMode());
             statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+
+            FlightListPanel flightListPanel =
+                    new FlightListPanel(logic.getFilteredFlightList());
+            flightListPanelPlaceholder.getChildren().add(flightListPanel.getRoot());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

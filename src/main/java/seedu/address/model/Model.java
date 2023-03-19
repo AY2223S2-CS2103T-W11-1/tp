@@ -60,6 +60,11 @@ public interface Model {
     ObservableList<Item> getItemsList();
 
     /**
+     * Returns the list of flights.
+     */
+    ObservableList<Flight> getFlightList();
+
+    /**
      * Returns the user prefs' GUI settings.
      */
     GuiSettings getGuiSettings();
@@ -213,6 +218,14 @@ public interface Model {
     // ================ Location methods ==============================
 
     /**
+     * Returns location object by location id
+     *
+     * @param id the location id
+     * @return the location object with the id
+     */
+    Location getLocationById(String id);
+
+    /**
      * Returns true if the location is in the location list
      *
      * @param location a location object to be checked
@@ -248,6 +261,9 @@ public interface Model {
 
     void updateFilteredLocationList(Predicate<Location> predicate);
 
+    void linkFlightToLocations(Flight flight, Location departureLocation, Location arrivalLocation);
+
+    void unlinkFlightToLocations(Flight flight);
 
     // ================ Crew methods ==============================
 
@@ -309,18 +325,35 @@ public interface Model {
     // ================ Plane methods ==============================
 
     void setPlaneManager(ReadOnlyItemManager<Plane> manager);
+
     ReadOnlyItemManager<Plane> getPlaneManager();
+
     void addPlane(Plane plane);
+
     void deletePlane(Plane plane);
+
     void deletePlane(String id);
+
     boolean hasPlane(Plane plane);
+
     boolean hasPlane(String id);
+
     void setPlane(Plane target, Plane editedPlane);
+
     ObservableList<Plane> getFilteredPlaneList();
+
     void updateFilteredPlaneList(Predicate<Plane> predicate);
 
 
     // ================ Flight methods ==============================
+
+    /**
+     * Returns flight object by flight id
+     *
+     * @param id the flight id
+     * @return the flight object with the id
+     */
+    Flight getFlightById(String id);
 
     /**
      * Returns the flight manager
@@ -384,22 +417,30 @@ public interface Model {
      * {@code target} must exist in Wingman
      * The flight identity of {@code editedFlight} must not be the same as another existing flight in Wingman
      *
-     * @param target the flight to be replaced
+     * @param target       the flight to be replaced
      * @param editedFlight the flight to replace with
      */
     void setFlight(Flight target, Flight editedFlight);
 
     /**
+     * Links a plane to a flight.
+     *
+     * @param flight The flight to be linked to.
+     * @param plane  The plane to be linked to a flight.
+     */
+    void linkPlane(Flight flight, Plane plane);
+
+    /**
+     * Unlinks a flight from any plane.
+     *
+     * @param flight The flight to be unlinked from.
+     */
+    void unlinkPlane(Flight flight);
+
+    /**
      * Returns an unmodifiable view of the filtered flight list
+     *
      * @return unmodifiable view of the filtered flight list
      */
     ObservableList<Flight> getFilteredFlightList();
-
-    /**
-     * Updates the filter of the filtered flight list to filter by the given {@code predicate}
-     *
-     * @param predicate the new predicate to use
-     * @throws NullPointerException if {@code predicate} is null
-     */
-    void updateFilteredFlightList(Predicate<Flight> predicate);
 }

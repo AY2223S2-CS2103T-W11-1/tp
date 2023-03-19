@@ -16,7 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.OperationMode;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.item.Item;
-import seedu.address.model.person.Person;
+import seedu.address.model.flight.Flight;
 import seedu.address.storage.Storage;
 
 /**
@@ -97,21 +97,6 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
-    }
-
-    @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
-    }
-
-    @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
-    }
-
-    @Override
     public GuiSettings getGuiSettings() {
         return model.getGuiSettings();
     }
@@ -127,6 +112,14 @@ public class LogicManager implements Logic {
                         + "items");
         return model.getItemsList();
     }
+
+    @Override
+    public ObservableList<Flight> getFilteredFlightList() {
+        logger.info("Getting filtered flight list: " + model.getFlightList().size() + " "
+                + "flights");
+        return model.getFlightList();
+    }
+
 
     @Override
     public OperationMode getOperationMode() {
