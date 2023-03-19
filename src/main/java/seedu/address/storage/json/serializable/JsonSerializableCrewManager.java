@@ -16,11 +16,13 @@ import seedu.address.storage.json.adapted.JsonAdaptedCrew;
  * Represents a serializable manager of crew.
  */
 @JsonRootName(value = "crewmanager")
-public class JsonSerializableCrewManager extends JsonItemManager<Crew, JsonAdaptedCrew> {
+public class JsonSerializableCrewManager
+        extends JsonItemManager<Crew, JsonAdaptedCrew> {
 
     @JsonCreator
     public JsonSerializableCrewManager(
-            @JsonProperty("items") List<JsonAdaptedCrew> crew) {
+            @JsonProperty("items") List<JsonAdaptedCrew> crew
+    ) {
         this.items.addAll(crew);
     }
 
@@ -33,7 +35,8 @@ public class JsonSerializableCrewManager extends JsonItemManager<Crew, JsonAdapt
      * @return a new JsonSerializableCrewManager
      */
     public static JsonSerializableCrewManager from(
-            ReadOnlyItemManager<Crew> manager) {
+            ReadOnlyItemManager<Crew> manager
+    ) {
         final JsonSerializableCrewManager res =
                 new JsonSerializableCrewManager(new ArrayList<>());
         res.readFromManager(manager);

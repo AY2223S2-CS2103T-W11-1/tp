@@ -13,16 +13,17 @@ import seedu.address.storage.json.JsonItemManager;
 import seedu.address.storage.json.adapted.JsonAdaptedFlight;
 
 
-
 /**
  * Represents a serializable manager of flights.
  */
 @JsonRootName(value = "flightmanager")
-public class JsonSerializableFlightManager extends JsonItemManager<Flight, JsonAdaptedFlight> {
+public class JsonSerializableFlightManager
+        extends JsonItemManager<Flight, JsonAdaptedFlight> {
 
     @JsonCreator
     public JsonSerializableFlightManager(
-            @JsonProperty("items") List<JsonAdaptedFlight> flights) {
+            @JsonProperty("items") List<JsonAdaptedFlight> flights
+    ) {
         this.items.addAll(flights);
     }
 
@@ -35,7 +36,8 @@ public class JsonSerializableFlightManager extends JsonItemManager<Flight, JsonA
      * @return a new JsonSerializableFlightManager
      */
     public static JsonSerializableFlightManager from(
-            ReadOnlyItemManager<Flight> manager) {
+            ReadOnlyItemManager<Flight> manager
+    ) {
         final JsonSerializableFlightManager res =
                 new JsonSerializableFlightManager(new ArrayList<>());
         res.readFromManager(manager);

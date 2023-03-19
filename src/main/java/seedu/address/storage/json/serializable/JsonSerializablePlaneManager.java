@@ -16,10 +16,12 @@ import seedu.address.storage.json.adapted.JsonAdaptedPlane;
  * Represents a serializable manager of planes.
  */
 @JsonRootName(value = "planemanager")
-public class JsonSerializablePlaneManager extends JsonItemManager<Plane, JsonAdaptedPlane> {
+public class JsonSerializablePlaneManager
+        extends JsonItemManager<Plane, JsonAdaptedPlane> {
     @JsonCreator
     public JsonSerializablePlaneManager(
-            @JsonProperty("items") List<JsonAdaptedPlane> planes) {
+            @JsonProperty("items") List<JsonAdaptedPlane> planes
+    ) {
         this.items.addAll(planes);
     }
 
@@ -29,9 +31,11 @@ public class JsonSerializablePlaneManager extends JsonItemManager<Plane, JsonAda
      * @param manager the manager to create the JsonSerializablePlaneManager
      *                from, it should be a ReadOnlyItemManager
      *                &lt;Plane&gt;
-     * @return        a new JsonSerializablePilotManager.
+     * @return a new JsonSerializablePilotManager.
      */
-    public static JsonSerializablePlaneManager from(ReadOnlyItemManager<Plane> manager) {
+    public static JsonSerializablePlaneManager from(
+            ReadOnlyItemManager<Plane> manager
+    ) {
         final JsonSerializablePlaneManager res =
                 new JsonSerializablePlaneManager(new ArrayList<>());
         res.readFromManager(manager);

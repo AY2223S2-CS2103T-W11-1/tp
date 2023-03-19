@@ -27,9 +27,12 @@ import seedu.address.storage.ItemStorage;
  * @param <M> the type of the {@link JsonItemManager} to be stored.
  */
 public abstract class JsonItemStorage<T extends Item,
-        F extends JsonAdaptedModel<T>,
-        M extends JsonItemManager<T, F>>
+                                             F extends JsonAdaptedModel<T>,
+                                             M extends JsonItemManager<T, F>>
         implements ItemStorage<T> {
+
+    private static final String ILLEGAL_VALUE_MESSAGE =
+            "Illegal value found in %s: %s";
 
     /**
      * The logger to be used by this class.
@@ -56,7 +59,12 @@ public abstract class JsonItemStorage<T extends Item,
      * @param filePath the path to the file to be read from and written to.
      */
     public JsonItemStorage(Path filePath) {
-        this(filePath, JsonHelper.INSTANCE, FileHelper.INSTANCE, LogsCenter.getLogger(JsonItemStorage.class));
+        this(
+                filePath,
+                JsonHelper.INSTANCE,
+                FileHelper.INSTANCE,
+                LogsCenter.getLogger(JsonItemStorage.class)
+        );
     }
 
     /**
@@ -66,8 +74,10 @@ public abstract class JsonItemStorage<T extends Item,
      * @param jsonHelper the JsonHelper to be used.
      * @param fileHelper the FileHelper to be used.
      */
-    protected JsonItemStorage(Path filePath, JsonHelper jsonHelper,
-                              FileHelper fileHelper, Logger logger) {
+    protected JsonItemStorage(
+            Path filePath, JsonHelper jsonHelper,
+            FileHelper fileHelper, Logger logger
+    ) {
         this.filePath = filePath;
         this.jsonHelper = jsonHelper;
         this.fileHelper = fileHelper;
@@ -109,15 +119,21 @@ public abstract class JsonItemStorage<T extends Item,
     public Optional<? extends ReadOnlyItemManager<T>> read(Path filePath)
             throws DataConversionException, IOException {
         requireNonNull(filePath);
-        Optional<M> jsonManager = jsonHelper.readJsonFile(filePath, getManagerClass());
+        Optional<M> jsonManager = jsonHelper.readJsonFile(
+                filePath,
+                getManagerClass()
+        );
         if (jsonManager.isEmpty()) {
             return Optional.empty();
         }
         try {
             return Optional.of(jsonManager.get().toModelType());
         } catch (IllegalValueException ive) {
-            logger.warning("Illegal values found in " + filePath + ": "
-                                + ive.getMessage());
+            logger.warning(String.format(
+                    ILLEGAL_VALUE_MESSAGE,
+                    filePath,
+                    ive.getMessage()
+            ));
             throw new DataConversionException(ive);
         }
     }
@@ -129,8 +145,10 @@ public abstract class JsonItemStorage<T extends Item,
     }
 
     @Override
-    public void save(ReadOnlyItemManager<T> itemManager,
-                     Path filePath) throws IOException {
+    public void save(
+            ReadOnlyItemManager<T> itemManager,
+            Path filePath
+    ) throws IOException {
         requireAllNonNull(itemManager, filePath);
         fileHelper.createIfMissing(filePath);
         jsonHelper.saveJsonFile(createManager(itemManager), filePath);

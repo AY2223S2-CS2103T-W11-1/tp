@@ -11,8 +11,8 @@ import seedu.address.storage.json.serializable.JsonSerializablePlaneManager;
 /**
  * Represents a storage for {@link Plane}s.
  */
-public class JsonPlaneManagerStorage extends JsonItemStorage<Plane,
-        JsonAdaptedPlane, JsonSerializablePlaneManager> {
+public class JsonPlaneManagerStorage
+        extends JsonItemStorage<Plane, JsonAdaptedPlane, JsonSerializablePlaneManager> {
     public JsonPlaneManagerStorage(Path filePath) {
         super(filePath);
     }
@@ -23,7 +23,9 @@ public class JsonPlaneManagerStorage extends JsonItemStorage<Plane,
     }
 
     @Override
-    protected JsonSerializablePlaneManager createManager(ReadOnlyItemManager<Plane> modelManager) {
+    protected JsonSerializablePlaneManager createManager(
+            ReadOnlyItemManager<Plane> modelManager
+    ) {
         return JsonSerializablePlaneManager.from(modelManager);
     }
 }

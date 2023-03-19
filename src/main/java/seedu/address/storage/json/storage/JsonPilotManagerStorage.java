@@ -11,8 +11,8 @@ import seedu.address.storage.json.serializable.JsonSerializablePilotManager;
 /**
  * Represents a storage for {@link Pilot}s.
  */
-public class JsonPilotManagerStorage extends JsonItemStorage<Pilot,
-        JsonAdaptedPilot, JsonSerializablePilotManager> {
+public class JsonPilotManagerStorage
+        extends JsonItemStorage<Pilot, JsonAdaptedPilot, JsonSerializablePilotManager> {
     /**
      * Creates a new JsonIdentifiableStorage object.
      *
@@ -28,7 +28,9 @@ public class JsonPilotManagerStorage extends JsonItemStorage<Pilot,
     }
 
     @Override
-    protected JsonSerializablePilotManager createManager(ReadOnlyItemManager<Pilot> modelManager) {
+    protected JsonSerializablePilotManager createManager(
+            ReadOnlyItemManager<Pilot> modelManager
+    ) {
         return JsonSerializablePilotManager.from(modelManager);
     }
 }

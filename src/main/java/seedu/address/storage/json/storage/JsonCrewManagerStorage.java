@@ -11,8 +11,8 @@ import seedu.address.storage.json.serializable.JsonSerializableCrewManager;
 /**
  * Represents a storage for {@link Crew}s.
  */
-public class JsonCrewManagerStorage extends JsonItemStorage<Crew,
-        JsonAdaptedCrew, JsonSerializableCrewManager> {
+public class JsonCrewManagerStorage
+        extends JsonItemStorage<Crew, JsonAdaptedCrew, JsonSerializableCrewManager> {
     /**
      * Creates a new JsonIdentifiableStorage object.
      *
@@ -28,7 +28,9 @@ public class JsonCrewManagerStorage extends JsonItemStorage<Crew,
     }
 
     @Override
-    protected JsonSerializableCrewManager createManager(ReadOnlyItemManager<Crew> modelManager) {
+    protected JsonSerializableCrewManager createManager(
+            ReadOnlyItemManager<Crew> modelManager
+    ) {
         return JsonSerializableCrewManager.from(modelManager);
     }
 }

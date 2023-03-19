@@ -16,11 +16,13 @@ import seedu.address.storage.json.adapted.JsonAdaptedLocation;
  * Represents a serializable manager of locations.
  */
 @JsonRootName(value = "locationmanager")
-public class JsonSerializableLocationManager extends JsonItemManager<Location, JsonAdaptedLocation> {
+public class JsonSerializableLocationManager
+        extends JsonItemManager<Location, JsonAdaptedLocation> {
 
     @JsonCreator
     public JsonSerializableLocationManager(
-        @JsonProperty("items") List<JsonAdaptedLocation> location) {
+            @JsonProperty("items") List<JsonAdaptedLocation> location
+    ) {
         this.items.addAll(location);
     }
 
@@ -34,7 +36,7 @@ public class JsonSerializableLocationManager extends JsonItemManager<Location, J
      */
     public static JsonSerializableLocationManager from(ReadOnlyItemManager<Location> manager) {
         final JsonSerializableLocationManager res =
-            new JsonSerializableLocationManager(new ArrayList<>());
+                new JsonSerializableLocationManager(new ArrayList<>());
         res.readFromManager(manager);
         return res;
     }

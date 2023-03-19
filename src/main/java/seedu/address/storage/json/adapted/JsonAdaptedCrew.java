@@ -13,7 +13,8 @@ import seedu.address.storage.json.JsonAdaptedModel;
  * Represents a Jackson-friendly version of a Crew.
  */
 public class JsonAdaptedCrew implements JsonAdaptedModel<Crew> {
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Crew's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT =
+            "Crew's %s field is missing!";
 
     /**
      * The id of the crew.
@@ -39,9 +40,11 @@ public class JsonAdaptedCrew implements JsonAdaptedModel<Crew> {
      * @param rank The rank of the crew.
      */
     @JsonCreator
-    public JsonAdaptedCrew(@JsonProperty("id") String id,
-                            @JsonProperty("name") String name,
-                            @JsonProperty("rank") int rank) {
+    public JsonAdaptedCrew(
+            @JsonProperty("id") String id,
+            @JsonProperty("name") String name,
+            @JsonProperty("rank") int rank
+    ) {
         this.id = id;
         this.name = name;
         this.rank = rank;
@@ -62,10 +65,14 @@ public class JsonAdaptedCrew implements JsonAdaptedModel<Crew> {
     @Override
     public Crew toModelType() throws IllegalValueException {
         if (id == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "id"));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, "id")
+            );
         }
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "name"));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, "name")
+            );
         }
 
         final CrewRank rank;
