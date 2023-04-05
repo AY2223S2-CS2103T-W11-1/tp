@@ -29,8 +29,6 @@ such as flight scheduling and management of crew, pilot, plane and location.
     - **[Linking a resource to a flight: `linkflight`](#3-linking-a-resource-to-a-flight)**
     - **[Unlinking a resource from a flight: `unlinkflight`](#4-unlinking-a-resource-from-a-flight)**
     - **[Checking a resource's availability: `check`](#5-checking-a-resources-availability)**
-  - **[Application Commands](#application-commands)**
-    - **[Exiting from Wingman: `exit`](#1-exiting-from-wingman)**
 - **[Prefix Summary](#prefix-summary)**
 - **[Command summary](#command-summary)**
 - **[FAQ](#faq)**
@@ -143,16 +141,16 @@ for each attribute as shown in the following examples.
 Note: The prefixes vary across different modes. Refer to the examples below for more clarity.
 </div>
 
-##### Crew mode: `add /n name /r rank`
+###### Crew mode: `add /n name /r rank`
 
 Prefixes:
 
 - `/n`: the name of the crew.
 - `/r`: the rank of the crew.
-    - `0`: Cabin Service Director,
-    - `1`: Senior Flight Attendant,
-    - `2`: Flight Attendant,
-    - `3`: Trainee.
+  - `0`: Senior Crew Member,
+  - `1`: Crew Member,
+  - `2`: Junior Crew Member,
+  - `3`: Trainee.
 
 <div style="border: 0px solid #ccc; background-color: #d9edff; color: darkblue; padding: 10px; margin-bottom: 10px;">
 Note: Your selection is limited to the designated ranks
@@ -165,10 +163,10 @@ Input:
 add /n John Smith /r 0
 
 Output: 
-Added Cabin Service Director John Smith.
+Added Senior Crew Member John Smith.
 ```
 
-##### Flight mode: `add /c code`
+###### Flight mode: `add /c code`
 
 Prefix:
 
@@ -184,7 +182,7 @@ Output:
 Added flight SQ230.
 ```
 
-##### Location mode: `add /n name`
+###### Location mode: `add /n name`
 
 Prefix:
 
@@ -200,7 +198,7 @@ Output:
 Added Tokyo.
 ```
 
-##### Pilot mode: `add /n name /r rank /a age /g gender /fh flight_hours`
+###### Pilot mode: `add /n name /r rank /a age /g gender /fh flight_hours`
 
 Prefixes:
 
@@ -233,7 +231,7 @@ Output:
 Added Cadet Amelia Earhart.
 ```
 
-##### Plane mode: `add /m model /a age`
+###### Plane mode: `add /m model /a age`
 
 Prefixes:
 
@@ -273,7 +271,7 @@ if you are currently in the `plane` mode, then this command will delete the spec
 
 This command has no variations across modes:
 
-##### All modes: `delete 3`
+###### All modes: `delete 3`
 
 Prefix:
 
@@ -291,8 +289,7 @@ Output:
 Deleted A380.
 ```
 
-For instance, Flight Attendant Mary will have an index number of 1 in the image below.
-(The index number will be displayed in future updates)
+For instance, Junior Crew Member Mary will have an index number of 1 in the image below.
 
 <img src="images/ModeCrewLanding.jpg" width="2032" alt="Mode crew page">
 
@@ -325,7 +322,7 @@ entity in the database.
 Note: The prefixes vary across different modes. Refer to the examples below for more clarity.
 </div>
 
-##### Crew mode: `linklocation /lo location_index /cr crew_index`
+###### Crew mode: `linklocation /lo location_index /cr crew_index`
 
 Prefixes:
 
@@ -339,10 +336,10 @@ Input:
 linklocation /lo 1 /cr 2
 
 Output: 
-Linked Cabin Service Director John Smith to Tokyo.
+Linked Senior Crew Member John Smith to Tokyo.
 ```
 
-##### Flight mode: `linklocation /fl flight_index /from location_index /to location_index`
+###### Flight mode: `linklocation /fl flight_index /from location_index /to location_index`
 
 Prefixes:
 
@@ -360,7 +357,7 @@ Output:
 Linked flight SQ230 departing from Tokyo, arriving in Paris.
 ```
 
-##### Pilot mode: `linklocation /lo location_index /pi pilot_index`
+###### Pilot mode: `linklocation /lo location_index /pi pilot_index`
 
 Prefixes:
 
@@ -377,7 +374,7 @@ Output:
 Linked Cadet Amelia Earhart to Tokyo.
 ```
 
-##### Plane mode: `linklocation /lo location_index /pl plane_index`
+###### Plane mode: `linklocation /lo location_index /pl plane_index`
 
 Prefixes:
 
@@ -423,7 +420,7 @@ from the specified location entity in the database.
 Note: The prefixes vary across different modes. Refer to the examples below for more clarity.
 </div>
 
-##### Crew mode: `unlinklocation /lo location_index /cr crew_index`
+###### Crew mode: `unlinklocation /lo location_index /cr crew_index`
 
 Prefixes:
 
@@ -437,10 +434,10 @@ Input:
 unlinklocation /lo 1 /cr 2
 
 Output: 
-Unlinked Cabin Service Director John Smith from Tokyo.
+Unlinked Senior Crew Member John Smith from Tokyo.
 ```
 
-##### Flight mode: `unlinklocation /fl flight_index /from departure_index /to arrival_index`
+###### Flight mode: `unlinklocation /fl flight_index /from departure_index /to arrival_index`
 
 Prefixes:
 
@@ -458,7 +455,7 @@ Output:
 Unlinked flight SQ230 from Tokyo and Paris.
 ```
 
-##### Pilot mode: `unlinklocation /lo location_index /pi pilot_index`
+###### Pilot mode: `unlinklocation /lo location_index /pi pilot_index`
 
 Prefixes:
 
@@ -475,7 +472,7 @@ Output:
 Unlinked Cadet Amelia Earhart from Tokyo.
 ```
 
-##### Plane mode: `unlinklocation /lo location_index /pl plane_index`
+###### Plane mode: `unlinklocation /lo location_index /pl plane_index`
 
 Prefixes:
 
@@ -518,7 +515,9 @@ if you are currently in the `plane` mode, then this command will link a `plane` 
 Note: The prefixes vary across different modes. Refer to the examples below for more clarity.
 </div>
 
-##### Crew mode: `linkflight /fl flight_index /csd crew_index /sfa crew_index /fa crew_index /tr crew_index`
+
+###### Crew mode: `linkflight /fl flight_index /csd crew_index /sfa crew_index /fa crew_index /tr crew_index`
+
 
 Prefixes:
 
@@ -542,7 +541,7 @@ Output:
 Linked Cabin Service Director John Smith to SQ230.
 ```
 
-##### Pilot mode: `linkflight /fl flight_index /pf pilot_index /pm pilot_index`
+###### Pilot mode: `linkflight /fl flight_index /pf pilot_index /pm pilot_index`
 
 Prefixes:
 
@@ -564,7 +563,7 @@ Output:
 Linked Cadet Amelia Earhart to SQ230.
 ```
 
-##### Plane mode: `linkflight /fl flight_index /pl plane_index`
+###### Plane mode: `linkflight /fl flight_index /pl plane_index`
 
 Prefixes:
 
@@ -603,13 +602,15 @@ described above.
 
 This command unlinks an entity of the current resource mode from a specified flight in Wingman's database. For example,
 if you are currently in the `plane` mode, then this command will unlink a `plane` from a specified flight in the 
-database.
+database. The 'resource entity - flight' link is specified in brackets besides the entity name in the list of flights.
+This is useful to help you identify which prefix to use to unlink a particular entity from a flight.
 
 <div style="border: 0px solid #ccc; background-color: #d9edff; color: darkblue; padding: 10px; margin-bottom: 10px;">
 Note: The prefixes vary across different modes. Refer to the examples below for more clarity.
 </div>
 
-##### Crew mode: `unlinkflight /fl flight_index /csd crew_index /sfa crew_index /fa crew_index /tr crew_index`
+
+###### Crew mode: `unlinkflight /fl flight_index /csd crew_index /sfa crew_index /fa crew_index /tr crew_index`
 
 Prefixes:
 
@@ -633,7 +634,7 @@ Output:
 Unlinked Cabin Service Director John Smith from SQ230.
 ```
 
-##### Pilot mode: `unlinkflight /fl flight_index /pf pilot_index /pm pilot_index`
+###### Pilot mode: `unlinkflight /fl flight_index /pf pilot_index /pm pilot_index`
 
 Prefixes:
 
@@ -656,7 +657,7 @@ Output:
 Unlinked Cadet Amelia Earhart from SQ230.
 ```
 
-##### Plane mode: `unlink /fl flight_index /pl plane_index`
+###### Plane mode: `unlink /fl flight_index /pl plane_index`
 
 Prefixes:
 
@@ -709,20 +710,6 @@ A380 is available.
 
 <div style="page-break-after: always;"></div>
 
-### Application Commands
-
-#### 1. Exiting from Wingman
-
-```
-exit
-```
-
-This will close the application window and exit the program.
-All your changes to your resources will be saved for you to get back to when you reopen the application.
-
-[Back to contents](#table-of-contents)
-
-<div style="page-break-after: always;"></div>
 
 ## Prefix Summary
 
@@ -765,7 +752,6 @@ All your changes to your resources will be saved for you to get back to when you
 | Link flight     | `linkflight /fl flight_index /resource_prefix resource_index `      | `linkflight /fl 0 /pf 1 /pm 2` |
 | Unlink flight   | `unlinkflight /fl flight_index /resource_prefix resource_index `    | `unlinkflight /fl 0 /pu 1`     |
 | Check           | `check /id resource_index`                                          | `check /id 0`                  |
-| Exit            | `exit`                                                              | `exit`                         |
 
 [Back to contents](#table-of-contents)
 
@@ -791,6 +777,7 @@ OpenJDK 64-Bit Server VM Zulu11.62+17-CA (build 11.0.18+10-LTS, mixed mode)
 ```
 
 ## Glossary
+
 | **Term**        | **Definition**                                                            |
 |-----------------|---------------------------------------------------------------------------|
 | Resource        | Crews, Pilots, Planes, Flights or Locations                               |

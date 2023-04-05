@@ -7,14 +7,14 @@ import wingman.model.pilot.exceptions.InvalidPilotRankException;
  * Represents the rank of a crew.
  */
 public enum CrewRank {
-    CABIN_SERVICE_DIRECTOR,
-    SENIOR_FLIGHT_ATTENDANT,
-    FLIGHT_ATTENDANT,
+    SENIOR_CREW_MEMBER,
+    CREW_MEMBER,
+    JUNIOR_CREW_MEMBER,
     TRAINEE;
 
-    public static final String CABIN_SERVICE_DIRECTOR_STRING = "Cabin Service Director";
-    public static final String SENIOR_FLIGHT_ATTENDANT_STRING = "Senior Flight Attendant";
-    public static final String FLIGHT_ATTENDANT_STRING = "Flight Attendant";
+    public static final String SENIOR_CREW_MEMBER_STRING = "Senior Crew Member";
+    public static final String CREW_MEMBER_STRING = "Crew Member";
+    public static final String JUNIOR_CREW_MEMBER_STRING = "Junior Crew Member";
     public static final String TRAINEE_STRING = "Trainee";
 
     /**
@@ -24,12 +24,12 @@ public enum CrewRank {
      */
     public String toString() {
         switch (this) {
-        case CABIN_SERVICE_DIRECTOR:
-            return CABIN_SERVICE_DIRECTOR_STRING;
-        case SENIOR_FLIGHT_ATTENDANT:
-            return SENIOR_FLIGHT_ATTENDANT_STRING;
-        case FLIGHT_ATTENDANT:
-            return FLIGHT_ATTENDANT_STRING;
+        case SENIOR_CREW_MEMBER:
+            return SENIOR_CREW_MEMBER_STRING;
+        case CREW_MEMBER:
+            return CREW_MEMBER_STRING;
+        case JUNIOR_CREW_MEMBER:
+            return JUNIOR_CREW_MEMBER_STRING;
         case TRAINEE:
             return TRAINEE_STRING;
         default:
@@ -45,12 +45,12 @@ public enum CrewRank {
      */
     public static CrewRank fromString(String rank) {
         switch (rank) {
-        case CABIN_SERVICE_DIRECTOR_STRING:
-            return CABIN_SERVICE_DIRECTOR;
-        case SENIOR_FLIGHT_ATTENDANT_STRING:
-            return SENIOR_FLIGHT_ATTENDANT;
-        case FLIGHT_ATTENDANT_STRING:
-            return FLIGHT_ATTENDANT;
+        case SENIOR_CREW_MEMBER_STRING:
+            return SENIOR_CREW_MEMBER;
+        case CREW_MEMBER_STRING:
+            return CREW_MEMBER;
+        case JUNIOR_CREW_MEMBER_STRING:
+            return JUNIOR_CREW_MEMBER;
         case TRAINEE_STRING:
             return TRAINEE;
         default:
@@ -65,11 +65,11 @@ public enum CrewRank {
      */
     public int toIndex() {
         switch (this) {
-        case CABIN_SERVICE_DIRECTOR:
+        case SENIOR_CREW_MEMBER:
             return 0;
-        case SENIOR_FLIGHT_ATTENDANT:
+        case CREW_MEMBER:
             return 1;
-        case FLIGHT_ATTENDANT:
+        case JUNIOR_CREW_MEMBER:
             return 2;
         case TRAINEE:
             return 3;
@@ -87,11 +87,11 @@ public enum CrewRank {
     public static CrewRank fromIndex(int index) {
         switch (index) {
         case 0:
-            return CABIN_SERVICE_DIRECTOR;
+            return SENIOR_CREW_MEMBER;
         case 1:
-            return SENIOR_FLIGHT_ATTENDANT;
+            return CREW_MEMBER;
         case 2:
-            return FLIGHT_ATTENDANT;
+            return JUNIOR_CREW_MEMBER;
         case 3:
             return TRAINEE;
         default:

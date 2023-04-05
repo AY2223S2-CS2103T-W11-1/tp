@@ -5,42 +5,46 @@ title: Wang Xiuxuan's Project Portfolio Page
 
 ### Project: AddressBook Level 3
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
-
+Wingman is an application designed to help airline managers efficiently manage the allocation of their resources.
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+* **Code Contribution**:
+    * My code contribution to the Wingman project can be found at
+      this [link](https://nus-cs2103-ay2223s2.github.io/tp-dashboard/?search=wxxedu&breakdown=true&sort=groupTitle&sortWithin=title&since=2023-02-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other).
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+1. Adapted `AddressBook`'s model layer such that we could easily extend it.
+   Including ([#21](https://github.com/AY2223S2-CS2103T-W11-1/tp/pull/21), 
+   [#22](https://github.com/AY2223S2-CS2103T-W11-1/tp/pull/22)):
+    * Migrated `UniquePersonsList` to `UniqueList`, a list that's unique with
+      the `Item`s contained inside it.
+    * Migrated `ReadOnlyAddressBook` to `ReadOnlyItemManager`, an interface that
+      managers the `Item`s inside it.
+    * Migrated `AddressBook` to `ItemManager`. 
+    * **What they do**: allows my teammates to work on independent features without writing much duplicate code. 
+    * **Justification**: same as above. 
 
-* **Code contributed**: [RepoSense link]()
+2. Handled general implementation for
+   Pilot ([#22](https://github.com/AY2223S2-CS2103T-W11-1/tp/pull/22))
+    * Responsible for implementing the Plane model in Wingman along with all the basic functions related. This includes:
+      adding and deleting a Plane, linking or unlinking a Plane to or from a Flight, and handling the storage and the
+      parsing of a Plane.
 
-* **Project management**:
-  * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+    * **What it does:** Allows for a Plane to be properly managed in the Wingman app.
+    * **Justification:** It includes all the necessary commands which a manager would need to manage the planes in their
+      fleet eg. they can add a new plane, and delete planes which are out of service.
 
-* **Enhancements to existing features**:
-  * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-  * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+3. Rewrote the parser for Wingman, abandoning the original parsing logic.
+   ([#39](https://github.com/AY2223S2-CS2103T-W11-1/tp/pull/39)) 
+    * Adopted a 2-level parsing scheme that can be adapted to a multi-level
+      parsing scheme easily. 
+    * **What it does**: parses the command put into Wingman. 
+    * **Justification**: to reduce the boilerplate in the original AddressBook
+      parser.
 
-* **Documentation**:
-  * User Guide:
-    * Added documentation for the features `delete` and `find` [\#72]()
-    * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
-  * Developer Guide:
-    * Added implementation details of the `delete` feature.
+4. Implemented a `Link` class that represents a link between two entities. 
+    * **What it does**: describes a link from one entity to another. 
+    * **Justification**: reduce code duplication (did not work so well).
 
-* **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
+* **Project Management**:
+    * Joined in discussions about where the project is going. 
 
-* **Tools**:
-  * Integrated a third party library (Natty) to the project ([\#42]())
-  * Integrated a new Github plugin (CircleCI) to the team repo
-
-* _{you can add/remove categories in the list above}_

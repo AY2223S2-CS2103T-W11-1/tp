@@ -488,6 +488,7 @@ public class Link<K, T extends Item,
                         .stream()
                         .map(Object::toString)
                         .collect(Collectors.joining(", ")));
+                builder.append(" (").append(key).append(")");
             } catch (LinkException e) {
                 builder.append("Failed to load: ").append(e.getMessage());
             }
