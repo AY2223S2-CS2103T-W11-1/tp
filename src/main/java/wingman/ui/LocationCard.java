@@ -32,6 +32,7 @@ public class LocationCard extends UiPart<VBox> {
         id.setText(displayedIndex + ". ");
         for (String line : location.getDisplayList()) {
             Label label = new Label(line);
+            label.setWrapText(true);
             cardPane.getChildren().add(label);
         }
     }

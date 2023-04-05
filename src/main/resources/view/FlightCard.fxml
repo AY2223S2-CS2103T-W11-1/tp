@@ -9,7 +9,7 @@
 <HBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <Label fx:id="id" styleClass="cell_big_label">
     </Label>
-    <VBox fx:id="cardPane" VBox.vgrow="ALWAYS"/>
+    <VBox fx:id="cardPane" VBox.vgrow="ALWAYS" maxWidth="250"/>
     <HBox alignment="CENTER_LEFT">
         <Label fx:id="flight" styleClass="cell_big_label">
         </Label>

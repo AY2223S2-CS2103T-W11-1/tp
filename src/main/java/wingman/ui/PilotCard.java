@@ -32,6 +32,7 @@ public class PilotCard extends UiPart<VBox> {
         id.setText(displayedIndex + ". ");
         for (String line : pilot.getDisplayList()) {
             Label label = new Label(line);
+            label.setWrapText(true);
             cardPane.getChildren().add(label);
         }
     }

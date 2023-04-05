@@ -31,6 +31,7 @@ public class CrewCard extends UiPart<VBox> {
         id.setText(displayedIndex + ". ");
         for (String line : crew.getDisplayList()) {
             Label label = new Label(line);
+            label.setWrapText(true);
             cardPane.getChildren().add(label);
         }
     }
