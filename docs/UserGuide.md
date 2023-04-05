@@ -518,9 +518,7 @@ if you are currently in the `plane` mode, then this command will link a `plane` 
 Note: The prefixes vary across different modes. Refer to the examples below for more clarity.
 </div>
 
-##### Crew mode:
-
-`linkflight /fl flight_index /csd crew_index /sfa crew_index /fa crew_index /tr crew_index`
+##### Crew mode: `linkflight /fl flight_index /csd crew_index /sfa crew_index /fa crew_index /tr crew_index`
 
 Prefixes:
 
@@ -611,9 +609,7 @@ database.
 Note: The prefixes vary across different modes. Refer to the examples below for more clarity.
 </div>
 
-##### Crew mode:
-
-`unlinkflight /fl flight_index /csd crew_index /sfa crew_index /fa crew_index /tr crew_index`
+##### Crew mode: `unlinkflight /fl flight_index /csd crew_index /sfa crew_index /fa crew_index /tr crew_index`
 
 Prefixes:
 
