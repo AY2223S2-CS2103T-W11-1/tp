@@ -36,8 +36,10 @@ public class CommandParam {
      * @param unnamedValue the unnamed token of the command.
      * @param namedValues  the named token of the command.
      */
-    public CommandParam(Optional<String> unnamedValue,
-        Optional<Map<String, Optional<String>>> namedValues) {
+    public CommandParam(
+            Optional<String> unnamedValue,
+            Optional<Map<String, Optional<String>>> namedValues
+    ) {
         this.unnamedValue = unnamedValue;
         this.namedValues = namedValues;
     }
@@ -54,26 +56,31 @@ public class CommandParam {
      * @param prefixes the prefixes of the command.
      * @return the command parameter created.
      */
-    public static CommandParam from(Deque<String> tokens,
-        Optional<Set<String>> prefixes) {
+    public static CommandParam from(
+            Deque<String> tokens,
+            Optional<Set<String>> prefixes
+    ) throws ParseException {
         // special cases
         if (tokens.size() == 0) {
-            return new CommandParam(Optional.empty(),
-                Optional.empty());
+            return new CommandParam(
+                    Optional.empty(),
+                    Optional.empty()
+            );
         }
         if (prefixes.isEmpty()) {
             return new CommandParam(
-                Optional.of(String.join(" ", tokens)),
-                Optional.empty());
+                    Optional.of(String.join(" ", tokens)),
+                    Optional.empty()
+            );
         }
         // set up
         Set<String> prefixMap = prefixes.get();
         // handle the unnamed token
         Optional<String> unnamedValue =
-            parseUnnamedValue(tokens, prefixMap);
+                parseUnnamedValue(tokens, prefixMap);
         // handle the named tokens
         Map<String, Optional<String>> namedValues =
-            parseNamedValues(tokens, prefixMap);
+                parseNamedValues(tokens, prefixMap);
         return new CommandParam(unnamedValue, Optional.of(namedValues));
     }
 
@@ -89,8 +96,10 @@ public class CommandParam {
      * @param prefixes the prefixes of the command.
      * @return the unnamed value parsed.
      */
-    public static Optional<String> parseUnnamedValue(Deque<String> tokens,
-        Set<String> prefixes) {
+    private static Optional<String> parseUnnamedValue(
+            Deque<String> tokens,
+            Set<String> prefixes
+    ) throws ParseException {
         if (tokens.size() == 0) {
             return Optional.empty();
         }
@@ -118,8 +127,10 @@ public class CommandParam {
      * @param prefixes the prefixes of the command.
      * @return the named values parsed.
      */
-    public static Map<String, Optional<String>> parseNamedValues(Deque<String> tokens,
-        Set<String> prefixes) {
+    private static Map<String, Optional<String>> parseNamedValues(
+            Deque<String> tokens,
+            Set<String> prefixes
+    ) throws ParseException {
         if (tokens.size() == 0) {
             return padNamedValues(new HashMap<>(), prefixes);
         }
@@ -135,11 +146,26 @@ public class CommandParam {
                 builder.append(tokens.pop()).append(" ");
                 continue;
             }
+            // check if it is already in there.
+            if (namedValues.containsKey(prefix)
+                        && namedValues.get(prefix).isPresent()) {
+                throw ParseException.formatted(
+                        "Found duplicated keys: %s",
+                        prefix
+                );
+            }
             namedValues.put(prefix, Optional.of(builder.toString().trim()));
             prefix = tokens.pop();
             builder.setLength(0);
         }
         if (builder.length() > 0) {
+            if (namedValues.containsKey(prefix)
+                        && namedValues.get(prefix).isPresent()) {
+                throw ParseException.formatted(
+                        "Found duplicated keys: %s",
+                        prefix
+                );
+            }
             namedValues.put(prefix, Optional.of(builder.toString().trim()));
         }
         return padNamedValues(namedValues, prefixes);
@@ -154,7 +180,8 @@ public class CommandParam {
      * @return the named values padded.
      */
     private static Map<String, Optional<String>> padNamedValues(
-        Map<String, Optional<String>> namedValues, Set<String> prefixes) {
+            Map<String, Optional<String>> namedValues, Set<String> prefixes
+    ) {
         for (String p : prefixes) {
             if (!namedValues.containsKey(p)) {
                 namedValues.put(p, Optional.empty());
@@ -218,9 +245,12 @@ public class CommandParam {
      * Gets the value of the named token with the given prefix or throws an exception.
      *
      * @throws ParseException if there is no value following a prefix,
-     *                          the input is an empty string.
+     *                        the input is an empty string.
      */
-    public String getNamedValuesOrThrow(String prefix, String message) throws ParseException {
+    public String getNamedValuesOrThrow(
+            String prefix,
+            String message
+    ) throws ParseException {
         final Optional<String> value = getNamedValues(prefix);
         if (value.isEmpty() || value.get().isEmpty()) {
             throw new ParseException(message);
@@ -234,13 +264,15 @@ public class CommandParam {
      * @see #getNamedValuesOrThrow(String, String)
      */
     public String getNamedValuesOrThrow(String prefix) throws ParseException {
-        return getNamedValuesOrThrow(prefix,
-                String.format(
-                    "Missing value for prefix %s.\n"
-                            + "Please try entering a value following %s.",
+        return getNamedValuesOrThrow(
                 prefix,
-                prefix
-        ));
+                String.format(
+                        "Missing value for prefix %s.\n"
+                                + "Please try entering a value following %s.",
+                        prefix,
+                        prefix
+                )
+        );
     }
 
     /**
@@ -273,7 +305,10 @@ public class CommandParam {
     /**
      * Gets the integer value of the named token with the given prefix or throws an exception.
      */
-    public int getNamedIntOrThrow(String prefix, String message) throws ParseException {
+    public int getNamedIntOrThrow(
+            String prefix,
+            String message
+    ) throws ParseException {
         final String value = getNamedValuesOrThrow(prefix, message);
         try {
             return Integer.parseInt(value);
@@ -311,6 +346,6 @@ public class CommandParam {
         }
         CommandParam otherCommandParam = (CommandParam) other;
         return unnamedValue.equals(otherCommandParam.unnamedValue)
-                   && namedValues.equals(otherCommandParam.namedValues);
+                       && namedValues.equals(otherCommandParam.namedValues);
     }
 }

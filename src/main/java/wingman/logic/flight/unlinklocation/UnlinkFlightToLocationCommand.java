@@ -51,7 +51,7 @@ public class UnlinkFlightToLocationCommand implements Command {
                 .map((entry) -> String.format(
                         "%s",
                         entry.getValue().toString()))
-                .collect(Collectors.joining(","));
+                .collect(Collectors.joining(", "));
         return String.format(DISPLAY_MESSAGE, result, flight.getCode());
     }
 
